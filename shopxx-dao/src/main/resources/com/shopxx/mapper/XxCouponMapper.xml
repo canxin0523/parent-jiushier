@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shopxx.mapper.XxCouponMapper" >
+  <resultMap id="BaseResultMap" type="com.shopxx.pojo.XxCoupon" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
+    <result column="begin_date" property="beginDate" jdbcType="TIMESTAMP" />
+    <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="end_price" property="endPrice" jdbcType="DECIMAL" />
+    <result column="is_enabled" property="isEnabled" jdbcType="BIT" />
+    <result column="is_exchange" property="isExchange" jdbcType="BIT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="point" property="point" jdbcType="INTEGER" />
+    <result column="prefix" property="prefix" jdbcType="VARCHAR" />
+    <result column="price_operator" property="priceOperator" jdbcType="INTEGER" />
+    <result column="price_value" property="priceValue" jdbcType="DECIMAL" />
+    <result column="start_price" property="startPrice" jdbcType="DECIMAL" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.shopxx.pojo.XxCoupon" extends="BaseResultMap" >
+    <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, create_date, modify_date, begin_date, end_date, end_price, is_enabled, is_exchange, 
+    name, point, prefix, price_operator, price_value, start_price
+  </sql>
+  <sql id="Blob_Column_List" >
+    introduction
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.shopxx.pojo.XxCouponExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from xx_coupon
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shopxx.pojo.XxCouponExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xx_coupon
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from xx_coupon
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from xx_coupon
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shopxx.pojo.XxCouponExample" >
+    delete from xx_coupon
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shopxx.pojo.XxCoupon" >
+    insert into xx_coupon (id, create_date, modify_date, 
+      begin_date, end_date, end_price, 
+      is_enabled, is_exchange, name, 
+      point, prefix, price_operator, 
+      price_value, start_price, introduction
+      )
+    values (#{id,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP}, 
+      #{beginDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, #{endPrice,jdbcType=DECIMAL}, 
+      #{isEnabled,jdbcType=BIT}, #{isExchange,jdbcType=BIT}, #{name,jdbcType=VARCHAR}, 
+      #{point,jdbcType=INTEGER}, #{prefix,jdbcType=VARCHAR}, #{priceOperator,jdbcType=INTEGER}, 
+      #{priceValue,jdbcType=DECIMAL}, #{startPrice,jdbcType=DECIMAL}, #{introduction,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shopxx.pojo.XxCoupon" >
+    insert into xx_coupon
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="modifyDate != null" >
+        modify_date,
+      </if>
+      <if test="beginDate != null" >
+        begin_date,
+      </if>
+      <if test="endDate != null" >
+        end_date,
+      </if>
+      <if test="endPrice != null" >
+        end_price,
+      </if>
+      <if test="isEnabled != null" >
+        is_enabled,
+      </if>
+      <if test="isExchange != null" >
+        is_exchange,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="point != null" >
+        point,
+      </if>
+      <if test="prefix != null" >
+        prefix,
+      </if>
+      <if test="priceOperator != null" >
+        price_operator,
+      </if>
+      <if test="priceValue != null" >
+        price_value,
+      </if>
+      <if test="startPrice != null" >
+        start_price,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beginDate != null" >
+        #{beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endPrice != null" >
+        #{endPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="isEnabled != null" >
+        #{isEnabled,jdbcType=BIT},
+      </if>
+      <if test="isExchange != null" >
+        #{isExchange,jdbcType=BIT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="point != null" >
+        #{point,jdbcType=INTEGER},
+      </if>
+      <if test="prefix != null" >
+        #{prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="priceOperator != null" >
+        #{priceOperator,jdbcType=INTEGER},
+      </if>
+      <if test="priceValue != null" >
+        #{priceValue,jdbcType=DECIMAL},
+      </if>
+      <if test="startPrice != null" >
+        #{startPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shopxx.pojo.XxCouponExample" resultType="java.lang.Integer" >
+    select count(*) from xx_coupon
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update xx_coupon
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyDate != null" >
+        modify_date = #{record.modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.beginDate != null" >
+        begin_date = #{record.beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endDate != null" >
+        end_date = #{record.endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endPrice != null" >
+        end_price = #{record.endPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isEnabled != null" >
+        is_enabled = #{record.isEnabled,jdbcType=BIT},
+      </if>
+      <if test="record.isExchange != null" >
+        is_exchange = #{record.isExchange,jdbcType=BIT},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.point != null" >
+        point = #{record.point,jdbcType=INTEGER},
+      </if>
+      <if test="record.prefix != null" >
+        prefix = #{record.prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceOperator != null" >
+        price_operator = #{record.priceOperator,jdbcType=INTEGER},
+      </if>
+      <if test="record.priceValue != null" >
+        price_value = #{record.priceValue,jdbcType=DECIMAL},
+      </if>
+      <if test="record.startPrice != null" >
+        start_price = #{record.startPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.introduction != null" >
+        introduction = #{record.introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update xx_coupon
+    set id = #{record.id,jdbcType=BIGINT},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      modify_date = #{record.modifyDate,jdbcType=TIMESTAMP},
+      begin_date = #{record.beginDate,jdbcType=TIMESTAMP},
+      end_date = #{record.endDate,jdbcType=TIMESTAMP},
+      end_price = #{record.endPrice,jdbcType=DECIMAL},
+      is_enabled = #{record.isEnabled,jdbcType=BIT},
+      is_exchange = #{record.isExchange,jdbcType=BIT},
+      name = #{record.name,jdbcType=VARCHAR},
+      point = #{record.point,jdbcType=INTEGER},
+      prefix = #{record.prefix,jdbcType=VARCHAR},
+      price_operator = #{record.priceOperator,jdbcType=INTEGER},
+      price_value = #{record.priceValue,jdbcType=DECIMAL},
+      start_price = #{record.startPrice,jdbcType=DECIMAL},
+      introduction = #{record.introduction,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update xx_coupon
+    set id = #{record.id,jdbcType=BIGINT},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      modify_date = #{record.modifyDate,jdbcType=TIMESTAMP},
+      begin_date = #{record.beginDate,jdbcType=TIMESTAMP},
+      end_date = #{record.endDate,jdbcType=TIMESTAMP},
+      end_price = #{record.endPrice,jdbcType=DECIMAL},
+      is_enabled = #{record.isEnabled,jdbcType=BIT},
+      is_exchange = #{record.isExchange,jdbcType=BIT},
+      name = #{record.name,jdbcType=VARCHAR},
+      point = #{record.point,jdbcType=INTEGER},
+      prefix = #{record.prefix,jdbcType=VARCHAR},
+      price_operator = #{record.priceOperator,jdbcType=INTEGER},
+      price_value = #{record.priceValue,jdbcType=DECIMAL},
+      start_price = #{record.startPrice,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shopxx.pojo.XxCoupon" >
+    update xx_coupon
+    <set >
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null" >
+        modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beginDate != null" >
+        begin_date = #{beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        end_date = #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endPrice != null" >
+        end_price = #{endPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="isEnabled != null" >
+        is_enabled = #{isEnabled,jdbcType=BIT},
+      </if>
+      <if test="isExchange != null" >
+        is_exchange = #{isExchange,jdbcType=BIT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="point != null" >
+        point = #{point,jdbcType=INTEGER},
+      </if>
+      <if test="prefix != null" >
+        prefix = #{prefix,jdbcType=VARCHAR},
+      </if>
+      <if test="priceOperator != null" >
+        price_operator = #{priceOperator,jdbcType=INTEGER},
+      </if>
+      <if test="priceValue != null" >
+        price_value = #{priceValue,jdbcType=DECIMAL},
+      </if>
+      <if test="startPrice != null" >
+        start_price = #{startPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shopxx.pojo.XxCoupon" >
+    update xx_coupon
+    set create_date = #{createDate,jdbcType=TIMESTAMP},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      begin_date = #{beginDate,jdbcType=TIMESTAMP},
+      end_date = #{endDate,jdbcType=TIMESTAMP},
+      end_price = #{endPrice,jdbcType=DECIMAL},
+      is_enabled = #{isEnabled,jdbcType=BIT},
+      is_exchange = #{isExchange,jdbcType=BIT},
+      name = #{name,jdbcType=VARCHAR},
+      point = #{point,jdbcType=INTEGER},
+      prefix = #{prefix,jdbcType=VARCHAR},
+      price_operator = #{priceOperator,jdbcType=INTEGER},
+      price_value = #{priceValue,jdbcType=DECIMAL},
+      start_price = #{startPrice,jdbcType=DECIMAL},
+      introduction = #{introduction,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shopxx.pojo.XxCoupon" >
+    update xx_coupon
+    set create_date = #{createDate,jdbcType=TIMESTAMP},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      begin_date = #{beginDate,jdbcType=TIMESTAMP},
+      end_date = #{endDate,jdbcType=TIMESTAMP},
+      end_price = #{endPrice,jdbcType=DECIMAL},
+      is_enabled = #{isEnabled,jdbcType=BIT},
+      is_exchange = #{isExchange,jdbcType=BIT},
+      name = #{name,jdbcType=VARCHAR},
+      point = #{point,jdbcType=INTEGER},
+      prefix = #{prefix,jdbcType=VARCHAR},
+      price_operator = #{priceOperator,jdbcType=INTEGER},
+      price_value = #{priceValue,jdbcType=DECIMAL},
+      start_price = #{startPrice,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

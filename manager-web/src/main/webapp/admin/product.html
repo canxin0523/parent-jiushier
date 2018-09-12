@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>管理</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js">  </script>
+    <!-- 分页组件开始 -->
+	<script src="../plugins/angularjs/pagination.js"></script>
+	<link rel="stylesheet" href="../plugins/angularjs/pagination.css">
+	<!-- 分页组件结束 -->
+    
+    
+    <script type="text/javascript" src="../js/base_pagination.js">  </script>
+    <script type="text/javascript" src="../js/service/productService.js">  </script>
+    <script type="text/javascript" src="../js/controller/baseController.js">  </script>
+    <script type="text/javascript" src="../js/controller/productController.js">  </script>
+    
+</head>
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="productController" >
+  <!-- .box-body -->
+                    <div class="box-header with-border">
+                        <h3 class="box-title">管理</h3>
+                    </div>
+
+                    <div class="box-body">
+
+                        <!-- 数据表格 -->
+                        <div class="table-box">
+
+                            <!--工具栏-->
+                            <div class="pull-left">
+                                <div class="form-group form-inline">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" ng-click="entity={}"><i class="fa fa-file-o"></i> 新建</button>
+                                        <button type="button" class="btn btn-default" title="删除" ng-click="dele()"><i class="fa fa-trash-o"></i> 删除</button>           
+                                        <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-tools pull-right">
+                                <div class="has-feedback">							       
+                                </div>
+                            </div>
+                            <!--工具栏/-->
+
+			                  <!--数据列表-->
+			                  <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+			                      <thead>
+			                          <tr>
+			                              <th class="" style="padding-right:0px">
+			                                  <input id="selall" type="checkbox" class="icheckbox_square-blue">
+			                              </th> 
+										                               <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+                             <th class="sorting"></th>			
+								     				
+					                      <th class="text-center">操作</th>
+			                          </tr>
+			                      </thead>
+			                      <tbody>
+			                          <tr ng-repeat="entity in list">
+			                              <td><input  type="checkbox" ng-click="updateSelection($event,entity.id)"></td>			                              
+				                                                       <td>{{entity.id}}</td>			
+                             <td>{{entity.createDate}}</td>			
+                             <td>{{entity.modifyDate}}</td>			
+                             <td>{{entity.allocatedStock}}</td>			
+                             <td>{{entity.attributeValue0}}</td>			
+                             <td>{{entity.attributeValue1}}</td>			
+                             <td>{{entity.attributeValue10}}</td>			
+                             <td>{{entity.attributeValue11}}</td>			
+                             <td>{{entity.attributeValue12}}</td>			
+                             <td>{{entity.attributeValue13}}</td>			
+                             <td>{{entity.attributeValue14}}</td>			
+                             <td>{{entity.attributeValue15}}</td>			
+                             <td>{{entity.attributeValue16}}</td>			
+                             <td>{{entity.attributeValue17}}</td>			
+                             <td>{{entity.attributeValue18}}</td>			
+                             <td>{{entity.attributeValue19}}</td>			
+                             <td>{{entity.attributeValue2}}</td>			
+                             <td>{{entity.attributeValue3}}</td>			
+                             <td>{{entity.attributeValue4}}</td>			
+                             <td>{{entity.attributeValue5}}</td>			
+                             <td>{{entity.attributeValue6}}</td>			
+                             <td>{{entity.attributeValue7}}</td>			
+                             <td>{{entity.attributeValue8}}</td>			
+                             <td>{{entity.attributeValue9}}</td>			
+                             <td>{{entity.cost}}</td>			
+                             <td>{{entity.fullName}}</td>			
+                             <td>{{entity.hits}}</td>			
+                             <td>{{entity.image}}</td>			
+                             <td>{{entity.introduction}}</td>			
+                             <td>{{entity.isGift}}</td>			
+                             <td>{{entity.isList}}</td>			
+                             <td>{{entity.isMarketable}}</td>			
+                             <td>{{entity.isTop}}</td>			
+                             <td>{{entity.keyword}}</td>			
+                             <td>{{entity.marketPrice}}</td>			
+                             <td>{{entity.memo}}</td>			
+                             <td>{{entity.monthHits}}</td>			
+                             <td>{{entity.monthHitsDate}}</td>			
+                             <td>{{entity.monthSales}}</td>			
+                             <td>{{entity.monthSalesDate}}</td>			
+                             <td>{{entity.name}}</td>			
+                             <td>{{entity.point}}</td>			
+                             <td>{{entity.price}}</td>			
+                             <td>{{entity.sales}}</td>			
+                             <td>{{entity.score}}</td>			
+                             <td>{{entity.scoreCount}}</td>			
+                             <td>{{entity.seoDescription}}</td>			
+                             <td>{{entity.seoKeywords}}</td>			
+                             <td>{{entity.seoTitle}}</td>			
+                             <td>{{entity.sn}}</td>			
+                             <td>{{entity.stock}}</td>			
+                             <td>{{entity.stockMemo}}</td>			
+                             <td>{{entity.totalScore}}</td>			
+                             <td>{{entity.unit}}</td>			
+                             <td>{{entity.weekHits}}</td>			
+                             <td>{{entity.weekHitsDate}}</td>			
+                             <td>{{entity.weekSales}}</td>			
+                             <td>{{entity.weekSalesDate}}</td>			
+                             <td>{{entity.weight}}</td>			
+                             <td>{{entity.brand}}</td>			
+                             <td>{{entity.goods}}</td>			
+                             <td>{{entity.productCategory}}</td>			
+		                                 
+		                                  <td class="text-center">                                           
+		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal" ng-click="findOne(entity.id)" >修改</button>                                           
+		                                  </td>
+			                          </tr>									 
+			                      </tbody>
+			                  </table>
+			                  <!--数据列表/-->                        
+                        </div>
+                        <!-- 数据表格 /-->
+                        <!-- 分页 -->
+						<tm-pagination conf="paginationConf"></tm-pagination>
+                     </div>
+                    <!-- /.box-body -->
+         
+<!-- 编辑窗口 -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" >
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">编辑</h3>
+		</div>
+		<div class="modal-body">	
+			 <table class="table table-bordered table-striped"  width="800px">			
+		      	  		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.createDate" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.modifyDate" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.allocatedStock" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue0" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue1" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue10" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue11" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue12" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue13" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue14" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue15" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue16" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue17" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue18" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue19" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue2" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue3" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue4" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue5" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue6" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue7" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue8" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.attributeValue9" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.cost" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.fullName" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.hits" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.image" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.introduction" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.isGift" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.isList" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.isMarketable" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.isTop" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.keyword" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.marketPrice" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.memo" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.monthHits" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.monthHitsDate" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.monthSales" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.monthSalesDate" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.name" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.point" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.price" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.sales" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.score" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.scoreCount" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.seoDescription" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.seoKeywords" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.seoTitle" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.sn" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.stock" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.stockMemo" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.totalScore" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.unit" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.weekHits" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.weekHitsDate" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.weekSales" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.weekSalesDate" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.weight" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.brand" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.goods" placeholder="" ></td>
+
+                        </tr>		
+		      	<tr>
+                             
+<td></td>
+
+                             <td><input  class="form-control" ng-model="entity.productCategory" placeholder="" ></td>
+
+                        </tr>		
+		  		      	
+			 </table>				
+		</div>
+		<div class="modal-footer">						
+			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存</button>
+			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+		</div>
+	  </div>
+	</div>
+</div>
+   
+</body>
+</html>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shopxx.mapper.XxPaymentShippingMethodMapper" >
+  <resultMap id="BaseResultMap" type="com.shopxx.pojo.XxPaymentShippingMethodKey" >
+    <id column="payment_methods" property="paymentMethods" jdbcType="BIGINT" />
+    <id column="shipping_methods" property="shippingMethods" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    payment_methods, shipping_methods
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shopxx.pojo.XxPaymentShippingMethodExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xx_payment_shipping_method
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.shopxx.pojo.XxPaymentShippingMethodKey" >
+    delete from xx_payment_shipping_method
+    where payment_methods = #{paymentMethods,jdbcType=BIGINT}
+      and shipping_methods = #{shippingMethods,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shopxx.pojo.XxPaymentShippingMethodExample" >
+    delete from xx_payment_shipping_method
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shopxx.pojo.XxPaymentShippingMethodKey" >
+    insert into xx_payment_shipping_method (payment_methods, shipping_methods)
+    values (#{paymentMethods,jdbcType=BIGINT}, #{shippingMethods,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shopxx.pojo.XxPaymentShippingMethodKey" >
+    insert into xx_payment_shipping_method
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paymentMethods != null" >
+        payment_methods,
+      </if>
+      <if test="shippingMethods != null" >
+        shipping_methods,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paymentMethods != null" >
+        #{paymentMethods,jdbcType=BIGINT},
+      </if>
+      <if test="shippingMethods != null" >
+        #{shippingMethods,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shopxx.pojo.XxPaymentShippingMethodExample" resultType="java.lang.Integer" >
+    select count(*) from xx_payment_shipping_method
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update xx_payment_shipping_method
+    <set >
+      <if test="record.paymentMethods != null" >
+        payment_methods = #{record.paymentMethods,jdbcType=BIGINT},
+      </if>
+      <if test="record.shippingMethods != null" >
+        shipping_methods = #{record.shippingMethods,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update xx_payment_shipping_method
+    set payment_methods = #{record.paymentMethods,jdbcType=BIGINT},
+      shipping_methods = #{record.shippingMethods,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
